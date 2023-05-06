@@ -15,14 +15,50 @@
     <textarea id="body" rows="10" cols="50"></textarea>
     <br><br>
     <button onclick="postContent()">Post</button>
+    <div id="posts"></div>
     <script>
       function postContent() {
         var title = document.getElementById("title").value;
         var body = document.getElementById("body").value;
-        var post = document.createElement("div");
-        post.innerHTML = "<h2>" + title + "</h2><p>" + body + "</p>";
-        document.body.appendChild(post);
+
+        // Send the data to the server
+        fetch('/post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({title: title, body: body})
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          // Add the new post to the page
+          var post = document.createElement("div");
+          post.innerHTML = "<h2>" + data.title + "</h2><p>" + data.body + "</p>";
+          document.getElementById("posts").appendChild(post);
+        })
+        .catch(function(error) {
+          console.error('Error:', error);
+        });
       }
+
+      // Load existing posts from the server
+      fetch('/posts')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          // Add each post to the page
+          for (var i = 0; i < data.length; i++) {
+            var post = document.createElement("div");
+            post.innerHTML = "<h2>" + data[i].title + "</h2><p>" + data[i].body + "</p>";
+            document.getElementById("posts").appendChild(post);
+          }
+        })
+        .catch(function(error) {
+          console.error('Error:', error);
+        });
     </script>
   </body>
 </html>
