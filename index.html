@@ -2,31 +2,14 @@
 <html>
 <head>
 	<title>TOTK</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<button onclick="createTextbox()">Create</button>
-	<div id="textboxContainer"></div>
-	<button id="sendButton" onclick="sendEmail()" style="display:none">Send</button>
+	<h1 style="text-align: center;">TOTK Site</h1>
 
-	<script>
-		function createTextbox() {
-			var container = document.getElementById("textboxContainer");
-			var textbox = document.createElement("textarea");
-			container.appendChild(textbox);
-			document.getElementById("sendButton").style.display = "block";
-		}
+	<div style="text-align: center;">
+		<img src="https://github.com/HtchHiker42/htchhiker42.github.io/blob/main/TOTKCoverArt.jpg" alt="Image 1">
+	</div>
 
-		function sendEmail() {
-			var email = "galaxyrgms@gmail.com";
-			var textbox = document.getElementsByTagName("textarea")[0];
-			var text = textbox.value;
-
-			// Code to send email goes here
-
-			alert("Email sent!");
-		}
-	</script>
+	<p style="text-align: center;">beans are large?</p>
 </body>
 </html>
