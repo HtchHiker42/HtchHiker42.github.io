@@ -6,13 +6,23 @@
   </head>
   <body>
     <h1>TOTK</h1>
-    <button onclick="createBox()">Create</button>
+    <label for="title">Title:</label>
+    <br>
+    <textarea id="title" rows="2" cols="50"></textarea>
+    <br><br>
+    <label for="body">Body:</label>
+    <br>
+    <textarea id="body" rows="10" cols="50"></textarea>
+    <br><br>
+    <button onclick="postContent()">Post</button>
     <script>
-      function createBox() {
-        var box = document.createElement("textarea");
-        document.body.appendChild(box);
+      function postContent() {
+        var title = document.getElementById("title").value;
+        var body = document.getElementById("body").value;
+        var post = document.createElement("div");
+        post.innerHTML = "<h2>" + title + "</h2><p>" + body + "</p>";
+        document.body.appendChild(post);
       }
     </script>
   </body>
 </html>
-
