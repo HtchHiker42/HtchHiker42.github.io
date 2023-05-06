@@ -8,23 +8,24 @@
 <body>
 	<button onclick="createTextbox()">Create</button>
 	<div id="textboxContainer"></div>
-	<button onclick="sendEmail()">Send</button>
+	<button id="sendButton" onclick="sendEmail()" style="display:none">Send</button>
 
 	<script>
 		function createTextbox() {
 			var container = document.getElementById("textboxContainer");
 			var textbox = document.createElement("textarea");
 			container.appendChild(textbox);
+			document.getElementById("sendButton").style.display = "block";
 		}
 
 		function sendEmail() {
 			var email = "galaxyrgms@gmail.com";
 			var textbox = document.getElementsByTagName("textarea")[0];
 			var text = textbox.value;
-			var subject = "New message from TOTK website";
 
-			// Use a mailto link to open the user's email client and pre-fill the email fields
-			window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
+			// Code to send email goes here
+
+			alert("Email sent!");
 		}
 	</script>
 </body>
