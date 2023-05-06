@@ -1,64 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>TOTK</title>
-  </head>
-  <body>
-    <h1>TOTK</h1>
-    <label for="title">Title:</label>
-    <br>
-    <textarea id="title" rows="2" cols="50"></textarea>
-    <br><br>
-    <label for="body">Body:</label>
-    <br>
-    <textarea id="body" rows="10" cols="50"></textarea>
-    <br><br>
-    <button onclick="postContent()">Post</button>
-    <div id="posts"></div>
-    <script>
-      function postContent() {
-        var title = document.getElementById("title").value;
-        var body = document.getElementById("body").value;
+<head>
+	<title>TOTK</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<button onclick="createTextbox()">Create</button>
+	<div id="textboxContainer"></div>
+	<button onclick="sendEmail()">Send</button>
 
-        // Send the data to the server
-        fetch('/post', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({title: title, body: body})
-        })
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(data) {
-          // Add the new post to the page
-          var post = document.createElement("div");
-          post.innerHTML = "<h2>" + data.title + "</h2><p>" + data.body + "</p>";
-          document.getElementById("posts").appendChild(post);
-        })
-        .catch(function(error) {
-          console.error('Error:', error);
-        });
-      }
+	<script>
+		function createTextbox() {
+			var container = document.getElementById("textboxContainer");
+			var textbox = document.createElement("textarea");
+			container.appendChild(textbox);
+		}
 
-      // Load existing posts from the server
-      fetch('/posts')
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(data) {
-          // Add each post to the page
-          for (var i = 0; i < data.length; i++) {
-            var post = document.createElement("div");
-            post.innerHTML = "<h2>" + data[i].title + "</h2><p>" + data[i].body + "</p>";
-            document.getElementById("posts").appendChild(post);
-          }
-        })
-        .catch(function(error) {
-          console.error('Error:', error);
-        });
-    </script>
-  </body>
+		function sendEmail() {
+			var email = "galaxyrgms@gmail.com";
+			var textbox = document.getElementsByTagName("textarea")[0];
+			var text = textbox.value;
+			var subject = "New message from TOTK website";
+
+			// Use a mailto link to open the user's email client and pre-fill the email fields
+			window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
+		}
+	</script>
+</body>
 </html>
